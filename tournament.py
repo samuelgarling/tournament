@@ -66,7 +66,7 @@ def playerStandings():
     """
     conn = connect()
     c = conn.cursor()
-    c.execute("SELECT * FROM players ORDER BY wins DESC")
+    c.execute("SELECT * FROM players_by_wins")
     return c.fetchall()
     conn.close()
 

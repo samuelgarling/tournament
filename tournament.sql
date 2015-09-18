@@ -25,3 +25,5 @@ CREATE TABLE matches (
 );
 
 CREATE VIEW players_size as SELECT count(*) from players;
+
+CREATE VIEW players_by_wins as SELECT * from players ORDER BY wins DESC;
