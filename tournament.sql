@@ -15,7 +15,7 @@ CREATE TABLE players (
 	player_id SERIAL PRIMARY KEY,
 	name varchar(255) NOT NULL,
 	wins int NOT NULL DEFAULT 0 CHECK (wins>=0),
-	matches_played int NOT NULL DEFAULT 0 CHECK (wins>=0)
+	matches int NOT NULL DEFAULT 0 CHECK (wins>=0)
 );
 
 CREATE TABLE matches (
