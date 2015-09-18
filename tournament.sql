@@ -5,7 +5,7 @@
 --
 -- You can write comments in this file by starting them with two dashes, like
 -- these lines here.
-DROP DATABASE tournament;
+DROP IF EXISTS DATABASE tournament;
 
 CREATE DATABASE tournament;
 
@@ -15,7 +15,7 @@ CREATE TABLE players (
 	player_id SERIAL PRIMARY KEY,
 	name varchar(255) NOT NULL,
 	wins int NOT NULL DEFAULT 0 CHECK (wins>=0),
-	matches int NOT NULL DEFAULT 0 CHECK (wins>=0)
+	matches int NOT NULL DEFAULT 0 CHECK (matches>=0)
 );
 
 CREATE TABLE matches (
