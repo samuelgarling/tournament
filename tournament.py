@@ -16,6 +16,7 @@ def deleteMatches():
     conn = connect()
     c = conn.cursor()
     c.execute("DELETE FROM matches")
+    conn.commit()
     conn.close()
 
 def deletePlayers():
@@ -23,6 +24,7 @@ def deletePlayers():
     conn = connect()
     c = conn.cursor()
     c.execute("DELETE FROM players")
+    conn.commit()
     conn.close()
 
 def countPlayers():
@@ -30,8 +32,9 @@ def countPlayers():
     conn = connect()
     c = conn.cursor()
     c.execute("SELECT count(*) from players")
-    return c.fetchall()
-    conn.close
+    result = c.fetchone()
+    conn.close()
+    return result[0]
 
 def registerPlayer(name):
     """Adds a player to the tournament database.
@@ -77,10 +80,10 @@ def reportMatch(winner, loser):
     """
     conn = connect()
     c = conn.cursor()
-    c.execute("INSERT INTO matches (winner,loser) VALUES (%d,%d)",(winner),(loser,))
+    c.execute("INSERT INTO matches (winner,loser) VALUES (%s,%s)",(winner,loser))
     c.execute("UPDATE players SET wins = wins + 1, matches = matches + 1 \
-        WHERE player_id = %d", (winner,))
-    c.execute("UPDATE players SET matches = matches + 1 WHERE player_id = %d", (loser,))
+        WHERE player_id = %s", (winner,))
+    c.execute("UPDATE players SET matches = matches + 1 WHERE player_id = %s", (loser,))
     conn.commit()
     conn.close()
 
@@ -100,5 +103,13 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
+    pairings = []
+    players = playerStandings()
+    num = 0
+    while num < len(players):
+        pairings.append([players[num][0],players[num][1],players[num+1][0],players[num+1][1]])
+        num = num + 2
+    return pairings
+
 
 
