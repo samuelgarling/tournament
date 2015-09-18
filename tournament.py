@@ -80,9 +80,12 @@ def reportMatch(winner, loser):
     """
     conn = connect()
     c = conn.cursor()
+    # Update the matches table with the result first
     c.execute("INSERT INTO matches (winner,loser) VALUES (%s,%s)",(winner,loser))
+    # Update the winner with a win and a match played
     c.execute("UPDATE players SET wins = wins + 1, matches = matches + 1 \
         WHERE player_id = %s", (winner,))
+    # Update the loser with a match played
     c.execute("UPDATE players SET matches = matches + 1 WHERE player_id = %s", (loser,))
     conn.commit()
     conn.close()
@@ -106,8 +109,10 @@ def swissPairings():
     pairings = []
     players = playerStandings()
     num = 0
+    # Get the pairs of players and match them.
     while num < len(players):
-        pairings.append([players[num][0],players[num][1],players[num+1][0],players[num+1][1]])
+        pairings.append([players[num][0],players[num][1],players[num+1][0],\
+            players[num+1][1]])
         num = num + 2
     return pairings
 
