@@ -24,4 +24,4 @@ CREATE TABLE matches (
 	loser int REFERENCES players(player_id)
 );
 
-
+CREATE VIEW players_size as SELECT count(*) from players;
