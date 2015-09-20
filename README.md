@@ -8,12 +8,12 @@ A Vagrant VM machine and a PostgreSQL installation is required to run this proje
 
 ### What's Included:
 
-'''
+```
 tournament/
-├── tournament_test.py
-├── tournament.py
-├── tournament.sql
-'''
+  ├── tournament_test.py
+  ├── tournament.py
+  ├── tournament.sql
+```
 
 Created by Sam Garling in conjunction with the Intro to Relational Databases course by Udacity.
 18/09/2015
